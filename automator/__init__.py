@@ -1,0 +1,1 @@
+# Automator integration module

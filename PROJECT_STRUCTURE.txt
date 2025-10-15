@@ -1,0 +1,176 @@
+VirusTotal Scanner for macOS - Project Structure
+═════════════════════════════════════════════════
+
+macos-virus-check/
+│
+├── 📄 Core Documentation
+│   ├── README.md                 # Main documentation
+│   ├── QUICKSTART.md            # Quick start guide
+│   ├── ARCHITECTURE.md          # Architecture details
+│   ├── CONTRIBUTING.md          # Contribution guidelines
+│   ├── CHANGELOG.md             # Version history
+│   └── LICENSE                  # MIT License
+│
+├── 🐍 Source Code (src/)
+│   ├── __init__.py              # Package initialization
+│   ├── vt_scanner.py            # VirusTotal API client
+│   ├── cli.py                   # CLI interface (Click + Rich)
+│   ├── config.py                # Configuration & cache management
+│   └── utils.py                 # Utility functions
+│
+├── 🔧 Automator Integration (automator/)
+│   ├── __init__.py              # Package initialization
+│   ├── vt_quick_action.py       # Quick Action script
+│   └── create_quick_action.sh   # Quick Action installer
+│
+├── 📚 Examples (examples/)
+│   └── example_usage.py         # Python API usage examples
+│
+├── 🚀 Installation & Setup
+│   ├── install.sh               # Main installation script
+│   ├── test_installation.sh     # Installation verification
+│   ├── requirements.txt         # Python dependencies
+│   └── .env.example            # Environment variable template
+│
+└── 🔒 Configuration (generated at runtime)
+    └── ~/.config/vt-scanner/    # User configuration directory
+        ├── config.json          # API key & settings
+        └── cache/               # Cached scan results
+
+Key Features by File:
+═════════════════════
+
+vt_scanner.py:
+  • VirusTotal API v3 client
+  • File hash calculation (SHA-256)
+  • Smart hash-first checking
+  • File upload & analysis
+  • Result parsing & formatting
+
+cli.py:
+  • Rich CLI interface
+  • Commands: scan, hash, config
+  • Progress indicators
+  • Color-coded output
+  • JSON export option
+  • Batch scanning support
+
+config.py:
+  • Secure API key storage
+  • Environment variable support
+  • Local result caching (7-day TTL)
+  • Configuration management
+  • Cache cleanup utilities
+
+utils.py:
+  • File size formatting
+  • Timestamp conversion
+  • macOS notifications
+  • Path validation
+  • File type detection
+  • Threat level indicators
+
+vt_quick_action.py:
+  • Finder integration
+  • Context menu handler
+  • Notification sender
+  • Cache integration
+
+User Workflows:
+═══════════════
+
+CLI Workflow:
+  1. User runs: vt-check scan file.dmg
+  2. CLI calculates file hash
+  3. Checks local cache
+  4. Queries VirusTotal (hash first)
+  5. Uploads if needed
+  6. Displays formatted results
+
+Quick Action Workflow:
+  1. User right-clicks file in Finder
+  2. Selects "VirusTotal Scan"
+  3. Automator triggers vt_quick_action.py
+  4. Script scans file
+  5. macOS notification shows results
+  6. Click notification → view full report
+
+Installation Workflow:
+  1. User runs: ./install.sh
+  2. Checks Python & dependencies
+  3. Creates virtual environment (optional)
+  4. Installs Python packages
+  5. Creates vt-check command
+  6. Configures API key
+  7. Installs Quick Action (optional)
+
+Commands Overview:
+══════════════════
+
+vt-check scan [FILES]
+  Scan one or more files for malware
+  Options:
+    -r, --recursive       Scan directories recursively
+    -f, --force-upload    Force upload even if hash exists
+    -n, --notify          Send macOS notification
+    -o, --open-report     Open report in browser
+    --json                Output as JSON
+    --no-cache            Disable cache
+
+vt-check hash HASH_VALUE
+  Check a file hash without uploading
+  Options:
+    -o, --open-report     Open report in browser
+
+vt-check config
+  Manage configuration and settings
+  Options:
+    --api-key KEY         Set VirusTotal API key
+    --show                Show current configuration
+    --clear-cache         Clear cached results
+
+Dependencies:
+═════════════
+
+Runtime:
+  • Python 3.8+
+  • requests (HTTP client)
+  • click (CLI framework)
+  • rich (terminal formatting)
+  • pync (macOS notifications)
+  • python-magic (file type detection)
+
+Development:
+  • pytest (testing)
+  • black (code formatting)
+  • flake8 (linting)
+  • mypy (type checking)
+
+Security Features:
+══════════════════
+
+✓ API key stored with 600 permissions (owner only)
+✓ Environment variable support for CI/CD
+✓ Hash-first approach minimizes uploads
+✓ Local caching reduces API calls
+✓ No telemetry or tracking
+✓ Privacy-focused design
+
+Performance:
+════════════
+
+✓ Hash-based cache (7-day TTL)
+✓ Avoids redundant API calls
+✓ Parallel file processing ready
+✓ Efficient file hashing (chunked reading)
+✓ Minimal memory footprint
+
+Support:
+════════
+
+Issues: https://github.com/yourusername/macos-virus-check/issues
+Docs: README.md, QUICKSTART.md, ARCHITECTURE.md
+API: https://developers.virustotal.com/reference/overview
+
+Version: 1.0.0
+License: MIT
