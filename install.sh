@@ -161,8 +161,11 @@ echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo -e "${YELLOW}→${NC} Creating Quick Action..."
-    bash "$SCRIPT_DIR/automator/create_quick_action.sh"
+    bash "$SCRIPT_DIR/automator/create_quick_action_v2.sh"
     echo -e "${GREEN}✓${NC} Quick Action installed"
+    echo ""
+    echo -e "${YELLOW}⚠${NC}  Important: Restart Finder for Quick Action to appear"
+    echo "  Run: killall Finder"
 fi
 
 # Installation complete

@@ -53,7 +53,9 @@ The installer will:
 3. Install required dependencies
 4. Create the `vt-check` command
 5. Configure your API key
-6. Optionally install the Finder Quick Action
+6. Optionally install the Finder Quick Action (using the fixed v2 script)
+
+**After installation with Quick Action**: Restart Finder by running `killall Finder`
 
 ### Manual Installation
 

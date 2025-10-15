@@ -9,7 +9,10 @@ cd macos-virus-check
 # 2. Execute o instalador
 ./install.sh
 
-# 3. Configure sua chave API
+# 3. Se instalou a Quick Action, reinicie o Finder
+killall Finder
+
+# 4. Configure sua chave API
 vt-check config --api-key 0c8ca843b973cfd8d78335cc01c52e28f19abaabd4df031b1b5ce353b883839a
 ```
 

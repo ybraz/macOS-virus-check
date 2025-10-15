@@ -18,6 +18,11 @@ Follow the prompts to:
 - Configure your API key
 - Optionally install Finder integration
 
+**Important**: If you install the Finder Quick Action, restart Finder:
+```bash
+killall Finder
+```
+
 ## 2. Get Your API Key
 
 1. Visit [VirusTotal API Key page](https://www.virustotal.com/gui/my-apikey)
